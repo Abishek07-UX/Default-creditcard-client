@@ -1,0 +1,30 @@
+# Local storage for private files (project plan and raw Excel file)
+myfile/
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
