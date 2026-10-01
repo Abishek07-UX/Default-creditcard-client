@@ -147,12 +147,40 @@ Default-creditcard-client/
         ├── stage4_features_created.csv
         ├── stage5_scaled.csv
         ├── stage6_final.csv
-        └── final_processed.csv                       # Ready-to-model final dataset (30,000 × 16)
+        ├── final_processed.csv                       # Ready-to-model final dataset (30,000 × 16)
+        ├── train.csv                                 # Shared 80% training rows, including target
+        └── test.csv                                  # Shared 20% test rows, including target
 ```
 
 ---
 
 ## 6. How to Run
+
+### Shared model training and comparison
+
+Run `group_pipeline.ipynb` through **Shared Train/Test Split and Evaluation** first. Every member then uses the same `X_train`, `y_train`, `X_test`, and `y_test`. Train in your labelled cell and submit your fitted model, whatever variable name you chose:
+
+```python
+my_model.fit(X_train, y_train)
+record_model('YOUR_IT_NUMBER', 'Your Model Name', my_model)
+```
+
+Run the final **Model Comparison** cell to see the submitted models' accuracy, precision, recall, F1, and ROC-AUC in one table. Rerunning your cell replaces your previous result.
+
+For a separate notebook, load the shared split files instead of making a new split:
+
+```python
+import pandas as pd
+target = 'default payment next month'
+train_df = pd.read_csv('results/outputs/train.csv')
+test_df = pd.read_csv('results/outputs/test.csv')
+X_train, y_train = train_df.drop(columns=target), train_df[target]
+X_test, y_test = test_df.drop(columns=target), test_df[target]
+```
+
+To include a separately developed model in the comparison, put its training code and `record_model(...)` call in your assigned cell of the shared notebook.
+
+The split uses already processed data. Since scaling and target-based feature selection happened before the split, scores should be treated as preliminary.
 
 ### Method A: Running in Google Colab (Recommended)
 
